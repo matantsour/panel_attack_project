@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+
+<table id = "myTable"  align="center" class="panels_table" dir="ltr" style="width: 70%; height: 80%">
+    {% for panel in panels %}
+
+      {% if  forloop.counter|add:-1|divisibleby:5 %}
+          <tr>
+      {% endif %}
+
+        <td class="panels_table_td" style="background-color:{{ panel.color }}">
+            <a class="panel_number" href="{% url 'panel_detail' panel.id %}">
+                {{ panel.id }}
+            </a>
+        </td>
+
+      {% if  forloop.counter|divisibleby:5 %}
+          </tr>
+      {% endif %}
+    {% endfor %}
+</table>
+<br>
+<div name="to_reset" style="text-align: center;">
+<a  href="{% url 'reset_game'%}"> reset_game</a>
+
+</div>
+
+</div>
+
+{% endblock %}

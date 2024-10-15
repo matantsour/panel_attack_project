@@ -1,0 +1,39 @@
+.site_title {
+	font-family: "Berlin Sans FB";
+	font-weight: lighter;
+	font-size: xxx-large;
+}
+
+.panels_table {
+	border: 2px solid #000000;
+}
+
+.panels_table_td {
+	text-align: center;
+	border: 1px solid #000000;
+	width: 14% ;
+
+}
+
+.panel_number {
+	color: #000000;
+	font-family: "Berlin Sans FB";
+	font-size: xx-large;
+	text-decoration: none;
+
+}
+
+.form_table {
+	border-style: solid;
+	border-width: 1px;
+}
+.form_title_td {
+	text-align: center;
+	border: 1px solid #000000;
+	width: 35%
+}
+.form_td {
+	text-align: center;
+	font-size: xx-large;
+	border: 1px solid #000000;
+}
