@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(python:*)",
-      "Bash(cd C:\\\\Users\\\\Matan\\\\Documents\\\\GitHub\\\\panel_attack_project:*)"
+      "Bash(cd C:\\\\Users\\\\Matan\\\\Documents\\\\GitHub\\\\panel_attack_project:*)",
+      "Bash(cd:*)",
+      "Bash(cd /c/Users/Matan/Documents/GitHub/panel_attack_project && py manage.py findstatic style.css 2>&1)"
     ],
     "deny": [],
     "ask": []

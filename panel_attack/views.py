@@ -89,7 +89,7 @@ class index(View):
         if form.is_valid():
             panel_id=form.cleaned_data['panel_id']
             color = form.cleaned_data['color']
-            answer = form.cleaned_data['answer']
+            answer = form.cleaned_data['answer'].replace('\r\n', '\n').replace('\r', '\n')
 
             panel_ob=Panel.objects.get(id=int(panel_id))
             if answer==panel_ob.correct_answer:

@@ -1,56 +1,37 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-<div>
-<form action="{% url 'index'%}" method="post">
+<form class="question-page" action="{% url 'index' %}" method="post">
     {% csrf_token %}
-    <input id="id_panel_id" name="panel_id" type="hidden" value="{{ panel.id }}" />
+    <input type="hidden" id="id_panel_id" name="panel_id" value="{{ panel.id }}">
 
-    <table align="center" class="form_table" dir="rtl" style="width: 70%; height: 50%">
-<tr style="height: 15%">
-<td>
-		<select id="id_color" name="color" style="width: 20%" multiple="multiple">
-			<option value="#ffff99"> yellow </option>
-			<option value="#ccffcc"> green </option>
-			<option value="#ccffff"> blue </option>
-			<option value="#ffe6ff"> pink </option>
-
-			</select>
-</td>
-</tr>
-<tr>
-	<td colspan="2" class="form_td" style="width: 70%"><strong>
-        {{ question_phrase }}
-	</strong>
-	</td>
-</tr>
-<tr>
-	<td class="form_title_td">
-                <input type="radio" name="answer" required="" id="id_answer" value="{{ questions_mixed.0 }}">{{ questions_mixed.0 }}
-
-    </td>
-	<td class="form_title_td" >
-        <input type="radio" name="answer" required="" id="id_answer" value="{{ questions_mixed.1 }}">{{ questions_mixed.1 }}
-
-
-	</td>
-</tr>
-<tr>
-	<td class="form_title_td" >
-        <input type="radio" name="answer" required="" id="id_answer" value="{{ questions_mixed.2 }}">{{ questions_mixed.2 }}
-
-	</td>
-	<td class="form_title_td">
-        <input type="radio" name="answer" required="" id="id_answer" value="{{ questions_mixed.3 }}">{{ questions_mixed.3 }}
-
-	</td>
-</tr>
-
-</table>
-    <br>
-
-    <div align="center">
-<input type="submit" value="OK! I'm Sure">
+    <div class="color-selector-row">
+        <label for="id_color">Team:</label>
+        <select class="color-select" id="id_color" name="color">
+            <option value="#ffff99">Yellow</option>
+            <option value="#ccffcc">Green</option>
+            <option value="#ccffff">Blue</option>
+            <option value="#ffe6ff">Pink</option>
+        </select>
     </div>
+
+    {% if panel.image %}
+    <img class="question-image" src="{% static 'images/questions/' %}{{ panel.image }}" alt="Question image">
+    {% endif %}
+
+    <div class="question-box">
+        <p class="question-text">{{ question_phrase }}</p>
+    </div>
+
+    <div class="answers-grid">
+        {% for answer in questions_mixed %}
+        <label class="answer-option">
+            <input type="radio" name="answer" value="{{ answer }}" required>
+            <span class="answer-text">{{ answer }}</span>
+        </label>
+        {% endfor %}
+    </div>
+
+    <button type="submit" class="submit-btn">OK — I'm Sure</button>
 </form>
-</div>
 {% endblock %}

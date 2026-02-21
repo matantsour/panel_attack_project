@@ -11,6 +11,12 @@ class Panel(models.Model):
     wrong_answer_1=models.CharField(max_length=1000)
     wrong_answer_2=models.CharField(max_length=1000)
     wrong_answer_3=models.CharField(max_length=1000)
+    image = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True,
+        help_text="Optional filename in static/images/questions/ (e.g. 'eiffel.jpg')"
+    )
 
     def __str__(self):
         return str(self.id)
