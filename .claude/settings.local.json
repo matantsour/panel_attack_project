@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(cd C:\\\\Users\\\\Matan\\\\Documents\\\\GitHub\\\\panel_attack_project:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
