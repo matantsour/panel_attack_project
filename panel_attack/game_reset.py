@@ -26,6 +26,23 @@ def load_questions():
         panel.wrong_answer_3 = row['wrong_answer_3'] if not pd.isna(row['wrong_answer_3'])  else " "
         panel.save()
 
+def assign_images():
+    Panel.objects.all().update(image=None)
+    images_dir = os.path.join(settings.BASE_DIR, 'static', 'images', 'questions')
+    if not os.path.isdir(images_dir):
+        return
+    for filename in os.listdir(images_dir):
+        name, ext = os.path.splitext(filename)
+        if not ext:
+            continue
+        try:
+            panel = Panel.objects.get(id=int(name))
+            panel.image = filename
+            panel.save()
+        except (ValueError, Panel.DoesNotExist):
+            continue
+
 def reset_game():
     reset_colors()
     load_questions()
+    assign_images()
