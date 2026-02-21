@@ -43,19 +43,40 @@ def get_rival_panels_bound_in_col(current):
     return True
 
 def get_rival_panels_bound_in_diag(current):
-    if current.id in [1,7,13,19,25]:
-        all_panels_numbers_in_diag = [1,7,13,19,25]
-    elif current.id in [5,9,13,17,21]:
-        all_panels_numbers_in_diag = [5,9,13,17,21]
-    else:
-        return False
-    all_panels_in_diag=list(Panel.objects.filter(id__in=all_panels_numbers_in_diag))
-    print(all_panels_in_diag)
-    to_the_left_rev = reversed(all_panels_in_diag[:all_panels_in_diag.index(current)])
-    rival_to_convert_lookup(to_the_left_rev, current)
-    to_the_right = all_panels_in_diag[all_panels_in_diag.index(current)+1:]
+    # Check all four diagonal directions from current panel
+    # Diagonals: NW-SE (↘), NE-SW (↙), and their reverse directions
 
-    rival_to_convert_lookup(to_the_right, current)
+    # Get all panels for diagonal calculations
+    all_panels = Panel.objects.all()
+
+    # Direction 1: Top-left to bottom-right (row+1, col+1)
+    diagonal_1 = []
+    for panel in all_panels:
+        if (panel.row - current.row) == (panel.col - current.col):
+            diagonal_1.append(panel)
+    diagonal_1.sort(key=lambda p: p.row)  # Sort by row (or col, same diagonal)
+
+    if len(diagonal_1) > 1 and current in diagonal_1:
+        idx = diagonal_1.index(current)
+        upper_left = reversed(diagonal_1[:idx])
+        lower_right = diagonal_1[idx+1:]
+        rival_to_convert_lookup(upper_left, current)
+        rival_to_convert_lookup(lower_right, current)
+
+    # Direction 2: Top-right to bottom-left (row+1, col-1)
+    diagonal_2 = []
+    for panel in all_panels:
+        if (panel.row - current.row) == -(panel.col - current.col):
+            diagonal_2.append(panel)
+    diagonal_2.sort(key=lambda p: p.row)  # Sort by row
+
+    if len(diagonal_2) > 1 and current in diagonal_2:
+        idx = diagonal_2.index(current)
+        upper_right = reversed(diagonal_2[:idx])
+        lower_left = diagonal_2[idx+1:]
+        rival_to_convert_lookup(upper_right, current)
+        rival_to_convert_lookup(lower_left, current)
+
     return True
 
 class index(View):

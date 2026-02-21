@@ -1,4 +1,6 @@
 import numpy as np
+import os
+from django.conf import settings
 
 from .models import Panel
 import pandas as pd
@@ -10,7 +12,9 @@ def reset_colors():
         p.save()
 
 def load_questions():
-    df=pd.read_excel(r"C:\Users\Matan\PycharmProjects\panel_attack_project\panel_attack\questions.xlsx")
+    # Use BASE_DIR from settings to find the questions.xlsx file
+    questions_path = os.path.join(settings.BASE_DIR, 'questions.xlsx')
+    df=pd.read_excel(questions_path)
     for idx,row in df.iterrows():
         panel=Panel.objects.get(id=int(row['panel']))
         panel.row=row['row']
