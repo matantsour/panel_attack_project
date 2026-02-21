@@ -109,25 +109,63 @@ body {
     padding: 0 1rem;
 }
 
-/* Color selector */
-.color-selector-row {
+/* Team color tiles */
+.team-selector {
     display: flex;
+    gap: 1rem;
+}
+
+.team-tile input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.team-tile-inner {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
-}
-
-.color-selector-row label {
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.color-select {
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.1rem;
-    padding: 0.4rem 0.8rem;
-    border: 2px solid #ccc;
-    border-radius: 8px;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    border: 3px solid transparent;
     cursor: pointer;
+    transition: border-color 0.15s, transform 0.12s, box-shadow 0.15s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    gap: 0.2rem;
+}
+
+.team-tile-inner:hover {
+    transform: scale(1.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.team-tile:has(input:checked) .team-tile-inner {
+    border-color: #333;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.25);
+    transform: scale(1.08);
+}
+
+.team-check {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    opacity: 0;
+    transition: opacity 0.15s;
+    line-height: 1;
+}
+
+.team-tile:has(input:checked) .team-check {
+    opacity: 1;
+}
+
+.team-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1a1a2e;
 }
 
 /* Optional image */

@@ -5,14 +5,35 @@
     {% csrf_token %}
     <input type="hidden" id="id_panel_id" name="panel_id" value="{{ panel.id }}">
 
-    <div class="color-selector-row">
-        <label for="id_color">Team:</label>
-        <select class="color-select" id="id_color" name="color">
-            <option value="#ffff99">Yellow</option>
-            <option value="#ccffcc">Green</option>
-            <option value="#ccffff">Blue</option>
-            <option value="#ffe6ff">Pink</option>
-        </select>
+    <div class="team-selector">
+        <label class="team-tile">
+            <input type="radio" name="color" value="#ffff99" required>
+            <span class="team-tile-inner" style="background-color: #ffff99;">
+                <span class="team-check">✓</span>
+                <span class="team-label">Yellow</span>
+            </span>
+        </label>
+        <label class="team-tile">
+            <input type="radio" name="color" value="#ccffcc" required>
+            <span class="team-tile-inner" style="background-color: #ccffcc;">
+                <span class="team-check">✓</span>
+                <span class="team-label">Green</span>
+            </span>
+        </label>
+        <label class="team-tile">
+            <input type="radio" name="color" value="#ccffff" required>
+            <span class="team-tile-inner" style="background-color: #ccffff;">
+                <span class="team-check">✓</span>
+                <span class="team-label">Blue</span>
+            </span>
+        </label>
+        <label class="team-tile">
+            <input type="radio" name="color" value="#ffe6ff" required>
+            <span class="team-tile-inner" style="background-color: #ffe6ff;">
+                <span class="team-check">✓</span>
+                <span class="team-label">Pink</span>
+            </span>
+        </label>
     </div>
 
     {% if panel.image %}
